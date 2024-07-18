@@ -36,5 +36,15 @@ module EmailService
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*' # Você pode restringir para apenas os domínios necessários
+        resource '*',
+          headers: :any,
+          methods: [:get, :post, :options, :put, :delete]
+      end
+    end
+
   end
 end
